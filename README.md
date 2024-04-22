@@ -32,6 +32,14 @@ Engagespot.initSdk(
 );
 ```
 
+### Logging in User
+
+To login a user, use the `loginUser` method:
+
+```dart
+Engagespot.loginUser(userId: 'user_id');
+```
+
 ### Marking Notifications as Read
 
 You can mark all notifications as read using the `markAsRead` method:
@@ -69,14 +77,6 @@ Retrieve notifications using the `getNotifications` method. This returns a `Noti
 NotificationSet notificationSet = await Engagespot.getNotifications();
 int unreadCount = notificationSet.unReadCount;
 List<EsMessage> notifications = notificationSet.NotificationMessage;
-```
-
-### Logging in User
-
-To login a user, use the `loginUser` method:
-
-```dart
-Engagespot.loginUser(userId: 'user_id');
 ```
 
 ## Note
