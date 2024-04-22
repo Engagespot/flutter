@@ -28,7 +28,6 @@ Before using any functionalities of the Engagespot SDK, you need to initialize i
 ```dart
 Engagespot.initSdk(
   apiKey: 'your_api_key',
-  apiSecret: 'your_api_secret',
   isDebug: true, // Set to true for debugging
 );
 ```
@@ -57,10 +56,8 @@ You can listen to real-time notification events using the `listenMessage` method
 Engagespot.listenMessage(
   onMessage: (EsMessage es) {
     // Handle incoming message
-  },
-  onReadAll: () {
-    // Handle when all notifications are marked as read
-  },
+  }
+ 
 );
 ```
 
