@@ -31,6 +31,18 @@ class Engagespot {
     );
   }
 
+  static clearAllNotification() async {
+    await post(
+      Uri.parse(
+          _baseUrl + _version + "notifications/markAllNotificationsAsDeleted"),
+      headers: {
+        "X-ENGAGESPOT-API-KEY": _apiKey!,
+        "X-ENGAGESPOT-USER-ID": _userID!,
+        "X-ENGAGESPOT-DEVICE-ID": "123"
+      },
+    );
+  }
+
   static RegisterFCM(String Token) async {
     try {
       final Response = await put(Uri.parse(_baseUrl + _version + "profile"),
