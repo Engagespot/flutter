@@ -48,6 +48,16 @@ You can mark all notifications as read using the `markAsRead` method:
 Engagespot.markAsRead();
 ```
 
+
+### Delete All Notification
+
+You can delete all notification using the `clearAllNotification` method:
+
+```dart
+Engagespot.clearAllNotification();
+```
+
+
 ### Registering FCM Tokens
 
 To register FCM tokens with Engagespot, use the `registerFCM` method:
