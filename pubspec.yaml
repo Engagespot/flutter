@@ -1,8 +1,7 @@
 name: engagespot_sdk
 description: "A Flutter SDK for integrating the Engagespot service into your applications.
-    Handle notifications, mark them as read, register Firebase Cloud Messaging (FCM) tokens,
-    and listen to real-time notification events with ease"
-version: 0.0.1
+    Handle notifications and listen to real-time notification events with ease"
+version: 0.0.2
 homepage: https://engagespot.co
 repository: https://github.com/Engagespot/flutter.git
 
