@@ -13,21 +13,9 @@ class NotificationModel {
     if (json['data'] != null) {
       esMessage = <EsMessage>[];
       json['data'].forEach((v) {
-        esMessage!.add( EsMessage.fromJson(v));
+        esMessage!.add(EsMessage.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['unreadCount'] = unreadCount;
-    if (pagination != null) {
-      data['pagination'] = pagination!.toJson();
-    }
-    if (esMessage != null) {
-      data['data'] = esMessage!.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
 
@@ -56,6 +44,7 @@ class EsMessage {
   String? createdAt;
   String? seenAt;
   String? clickedAt;
+  Map<String, dynamic>? data;
 
   EsMessage(
       {this.id,
@@ -65,7 +54,8 @@ class EsMessage {
       this.url,
       this.createdAt,
       this.seenAt,
-      this.clickedAt});
+      this.clickedAt,
+      this.data});
 
   EsMessage.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -78,18 +68,6 @@ class EsMessage {
     createdAt ??= json["created_at"];
     seenAt = json['seenAt'];
     clickedAt = json['clickedAt'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['message'] = this.message;
-    data['icon'] = this.icon;
-    data['url'] = this.url;
-    data['createdAt'] = this.createdAt;
-    data['seenAt'] = this.seenAt;
-    data['clickedAt'] = this.clickedAt;
-    return data;
+    data = json["data"];
   }
 }
