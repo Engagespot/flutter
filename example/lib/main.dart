@@ -9,6 +9,7 @@ void main() {
   );
 
   Engagespot.LoginUser(userId: "<<user_id>>");
+
   runApp(const MainApp());
 }
 

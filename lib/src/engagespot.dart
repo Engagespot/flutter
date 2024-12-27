@@ -82,7 +82,8 @@ class Engagespot {
     return false;
   }
 
-  @deprecated
+  @Deprecated(
+      "Use 'markAllAsRead' instead. This function will be removed in a future release.")
   static markAsRead() async {
     await post(
       Uri.parse(
