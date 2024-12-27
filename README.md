@@ -10,7 +10,7 @@ To use the Engagespot SDK in your Flutter project, follow these steps:
 
 ```yaml
 dependencies:
-  engagespot_sdk: ^1.0.0
+  engagespot_sdk: ^0.0.4
 ```
 
 2. Install the package by running the following command in your terminal:
@@ -42,10 +42,18 @@ Engagespot.loginUser(userId: 'user_id');
 
 ### Marking Notifications as Read
 
-You can mark all notifications as read using the `markAsRead` method:
+You can mark all notifications as read using the `markAllAsRead` method:
 
 ```dart
-Engagespot.markAsRead();
+Engagespot.markAllAsRead();
+```
+
+### Delete  Notification
+
+You can delete  notification using the `deleteNotification` method:
+
+```dart
+Engagespot.deleteNotification(notificationID : "notificationID" );
 ```
 
 

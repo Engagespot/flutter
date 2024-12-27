@@ -19,6 +19,70 @@ class Engagespot {
     _getUserID();
   }
 
+  /// Deletes a notification by its ID.
+  ///
+  /// This method sends a DELETE request to the specified notification endpoint
+  /// to remove a notification from the server. It requires the notification ID
+  /// as a parameter and uses predefined API keys and user credentials.
+  ///
+  /// **Parameters:**
+  /// - [notificationID]: The unique ID of the notification to delete. This is a required parameter.
+  ///
+  /// **Returns:**
+  /// - A [Future<bool>] indicating the success or failure of the deletion:
+  ///   - `true`: If the notification was successfully deleted.
+  ///   - `false`: If the deletion failed.
+  ///
+  /// **Usage Example:**
+  /// ```dart
+  /// bool isDeleted = await deleteNotification(notificationID: 12345);
+  /// if (isDeleted) {
+  ///   print("Notification deleted successfully.");
+  /// } else {
+  ///   print("Failed to delete the notification.");
+  /// }
+  /// ```
+  ///
+  /// **Error Handling:**
+  /// - Catches exceptions and logs any errors that occur during the deletion process.
+  /// - Ensures null-safety for `_apiKey` and `_userID` but throws an exception if either is null.
+  ///
+  /// **Dependencies:**
+  /// - Ensure Engagespot sdk is initalised.
+  ///
+  /// **Logs:**
+  /// - Logs success, failure, and error messages for debugging purposes.
+  ///
+  /// **Method Implementation
+
+  static Future<bool> deleteNotification({required int notificationID}) async {
+    try {
+      final response = await delete(
+        Uri.parse("$_baseUrl$_version/notifications/$notificationID"),
+        headers: {
+          "X-ENGAGESPOT-API-KEY": _apiKey!,
+          "X-ENGAGESPOT-USER-ID": _userID!,
+          "X-ENGAGESPOT-DEVICE-ID": "123",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        if (_isDebug) {
+          log("Notification with ID $notificationID deleted successfully.");
+        }
+        return true;
+      } else {
+        log("Failed to delete notification with ID $notificationID. Status code: ${response.statusCode}");
+        log("Response body: ${response.body}");
+      }
+    } catch (e) {
+      log("Error occurred while deleting notification with ID $notificationID: $e");
+    }
+
+    return false;
+  }
+
+  @deprecated
   static markAsRead() async {
     await post(
       Uri.parse(
@@ -31,16 +95,65 @@ class Engagespot {
     );
   }
 
+  /// Marks all notifications as read for the current user.
+  ///
+  /// This method sends a POST request to the notification service endpoint
+  /// to mark all notifications as seen for the specified user. It requires the
+  /// `_userID` to be non-null and non-empty, ensuring the user is logged in.
+  ///
+  /// **Parameters:**
+  /// - None
+  ///
+  /// **Returns:**
+  /// - A [Future<void>] indicating the asynchronous operation.
+  ///
+  /// **Usage Example:**
+  /// ```dart
+  /// await markAllAsRead();
+  /// ```
+  ///
+  /// **Error Handling:**
+  /// - If `_userID` is `null` or empty, the method logs an error message if `_isDebug` is enabled.
+  /// - Ensure `_apiKey` and `_userID` are properly initialized before calling this method.
+  ///
+  /// **Dependencies:**
+  /// - Requires `_baseUrl`, `_version`, `_apiKey`, `_userID`, and `_isDebug` to be correctly configured.
+  ///
+  /// **Logs:**
+  /// - Logs a debug message if the user is not logged in.
+  ///
+  /// **Method Implementation
+  static markAllAsRead() async {
+    if (_userID != null && _userID != "") {
+      await post(
+        Uri.parse(
+            _baseUrl + _version + "notifications/markAllNotificationsAsSeen"),
+        headers: {
+          "X-ENGAGESPOT-API-KEY": _apiKey!,
+          "X-ENGAGESPOT-USER-ID": _userID!,
+          "X-ENGAGESPOT-DEVICE-ID": "123"
+        },
+      );
+    } else {
+      if (_isDebug) log("User not logined");
+    }
+  }
+
   static clearAllNotification() async {
-    await post(
-      Uri.parse(
-          _baseUrl + _version + "notifications/markAllNotificationsAsDeleted"),
-      headers: {
-        "X-ENGAGESPOT-API-KEY": _apiKey!,
-        "X-ENGAGESPOT-USER-ID": _userID!,
-        "X-ENGAGESPOT-DEVICE-ID": "123"
-      },
-    );
+    if (_userID != null && _userID != "") {
+      await post(
+        Uri.parse(_baseUrl +
+            _version +
+            "notifications/markAllNotificationsAsDeleted"),
+        headers: {
+          "X-ENGAGESPOT-API-KEY": _apiKey!,
+          "X-ENGAGESPOT-USER-ID": _userID!,
+          "X-ENGAGESPOT-DEVICE-ID": "123"
+        },
+      );
+    } else {
+      if (_isDebug) log("User not logined");
+    }
   }
 
   static RegisterFCM(String Token) async {

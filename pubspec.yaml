@@ -1,7 +1,7 @@
 name: engagespot_sdk
 description: "A Flutter SDK for integrating the Engagespot service into your applications.
     Handle notifications and listen to real-time notification events with ease"
-version: 0.0.2
+version: 0.0.4
 homepage: https://engagespot.co
 repository: https://github.com/Engagespot/flutter.git
 
