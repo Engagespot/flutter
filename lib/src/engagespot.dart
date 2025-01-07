@@ -35,7 +35,7 @@ class Engagespot {
   ///
   /// **Usage Example:**
   /// ```dart
-  /// bool isDeleted = await deleteNotification(notificationID: 12345);
+  /// bool isDeleted = await Engagespot.deleteNotification(notificationID: 12345);
   /// if (isDeleted) {
   ///   print("Notification deleted successfully.");
   /// } else {
@@ -58,14 +58,14 @@ class Engagespot {
   static Future<bool> deleteNotification({required int notificationID}) async {
     try {
       final response = await delete(
-        Uri.parse("$_baseUrl$_version/notifications/$notificationID"),
+        Uri.parse("$_baseUrl${_version}notifications/$notificationID"),
         headers: {
           "X-ENGAGESPOT-API-KEY": _apiKey!,
           "X-ENGAGESPOT-USER-ID": _userID!,
           "X-ENGAGESPOT-DEVICE-ID": "123",
         },
       );
-
+      print(response.body);
       if (response.statusCode == 200) {
         if (_isDebug) {
           log("Notification with ID $notificationID deleted successfully.");
@@ -77,6 +77,65 @@ class Engagespot {
       }
     } catch (e) {
       log("Error occurred while deleting notification with ID $notificationID: $e");
+    }
+
+    return false;
+  }
+
+  /// The operation requires the user to be logged in (validated via `_userID`).
+  ///
+  /// If the request is successful, the method returns `true`. Otherwise, it returns `false`.
+  ///
+  /// Example:
+  /// ```dart
+  ///   bool isSuccess = await Engagespot.markNotificationAsRead(notificationID: {{notificationID}});
+  ///
+  ///   if (isSuccess) {
+  ///     print("Notification marked as read successfully.");
+  ///   } else {
+  ///     print("Failed to mark notification as read.");
+  ///   }
+  /// ```
+  ///
+  /// Parameters:
+  /// - [notificationID]: The unique identifier of the notification to be marked as read.
+  ///
+  /// Returns:
+  /// A `Future<bool>` indicating whether the notification was successfully marked as read:
+  /// - Returns `true` if the operation was successful.
+  /// - Returns `false` if the operation failed or the user was not logged in.
+  static Future<bool> markNotificationAsRead(
+      {required int notificationID}) async {
+    try {
+      if (_userID != null && _userID != "") {
+        final response = await post(
+            Uri.parse(
+                "$_baseUrl${_version}notifications/$notificationID/click"),
+            headers: {
+              "X-ENGAGESPOT-API-KEY": _apiKey!,
+              "X-ENGAGESPOT-USER-ID": _userID!,
+              "X-ENGAGESPOT-DEVICE-ID": "123",
+            },
+            body: {
+              "read": "true"
+            });
+
+        if (response.statusCode == 200) {
+          if (_isDebug) {
+            log("Notification with ID $notificationID mark as read successfully.");
+          }
+          return true;
+        } else {
+          log("Failed to mark as read notification with ID $notificationID. Status code: ${response.statusCode}");
+          log("Response body: ${response.body}");
+        }
+      } else {
+        if (_isDebug) {
+          log("User not logined");
+        }
+      }
+    } catch (e) {
+      log("Error occurred while updating status notification with ID $notificationID: $e");
     }
 
     return false;

@@ -1,0 +1,23 @@
+moduledependenciestarget: \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Modules/module.modulemap \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/Flutter.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterAppDelegate.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.1.sdk/System/Library/Frameworks/UIKit.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.1.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.1.sdk/usr/include/DarwinFoundation.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.1.sdk/System/Library/Frameworks/UserNotifications.framework/Modules/module.modulemap \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterMacros.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterPlugin.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterBinaryMessenger.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterChannels.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterCodecs.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterPlatformViews.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterTexture.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.1.sdk/System/Library/Frameworks/CoreMedia.framework/Modules/module.modulemap \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterCallbackCache.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterDartProject.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterEngine.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterEngineGroup.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
+  /Users/sabarinathp/Works/engagespot_sdk/example/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterViewController.h

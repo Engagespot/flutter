@@ -40,6 +40,21 @@ To login a user, use the `loginUser` method:
 Engagespot.loginUser(userId: 'user_id');
 ```
 
+### Marking Single Notifications as Read
+
+You can mark all notifications as read using the `markNotificationAsRead` method:
+
+```dart
+bool isSuccess = await Engagespot.markNotificationAsRead(notificationID: {{notificationID}});
+  
+     if (isSuccess) {
+       print("Notification marked as read successfully.");
+      } else {
+     print("Failed to mark notification as read.");
+     }
+```
+
+
 ### Marking Notifications as Read
 
 You can mark all notifications as read using the `markAllAsRead` method:
