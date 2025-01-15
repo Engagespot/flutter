@@ -25,4 +25,4 @@
 
 ## 0.0.6
 
-* New Function added: Function to mark single notification as seen
+* Function renamed

@@ -54,21 +54,6 @@ bool isSuccess = await Engagespot.markNotificationAsRead(notificationID: {{notif
      }
 ```
 
-### Marking Single Notifications as Seen
-
-You can mark notification as read using the `markNotificationAsSeen` method:
-
-```dart
-bool isSuccess = await Engagespot.markNotificationAsSeen(notificationID: {{notificationID}});
-  
-     if (isSuccess) {
-       print("Notification marked as read successfully.");
-      } else {
-     print("Failed to mark notification as read.");
-     }
-```
-
-
 
 ### Marking Notifications as Seen
 
