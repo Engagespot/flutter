@@ -10,7 +10,7 @@ To use the Engagespot SDK in your Flutter project, follow these steps:
 
 ```yaml
 dependencies:
-  engagespot_sdk: ^0.0.4
+  engagespot_sdk: ^0.0.6
 ```
 
 2. Install the package by running the following command in your terminal:
@@ -54,13 +54,28 @@ bool isSuccess = await Engagespot.markNotificationAsRead(notificationID: {{notif
      }
 ```
 
+### Marking Single Notifications as Seen
 
-### Marking Notifications as Read
-
-You can mark all notifications as read using the `markAllAsRead` method:
+You can mark notification as read using the `markNotificationAsSeen` method:
 
 ```dart
-Engagespot.markAllAsRead();
+bool isSuccess = await Engagespot.markNotificationAsSeen(notificationID: {{notificationID}});
+  
+     if (isSuccess) {
+       print("Notification marked as read successfully.");
+      } else {
+     print("Failed to mark notification as read.");
+     }
+```
+
+
+
+### Marking Notifications as Seen
+
+You can mark all notifications as seen using the `markAllAsSeen` method:
+
+```dart
+Engagespot.markAllAsSeen();
 ```
 
 ### Delete  Notification
@@ -108,7 +123,7 @@ Retrieve notifications using the `getNotifications` method. This returns a `Noti
 
 ```dart
 NotificationSet notificationSet = await Engagespot.getNotifications();
-int unreadCount = notificationSet.unReadCount;
+int unSeenCount = notificationSet.unSeenCount;
 List<EsMessage> notifications = notificationSet.NotificationMessage;
 ```
 

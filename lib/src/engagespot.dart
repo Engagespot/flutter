@@ -141,6 +141,62 @@ class Engagespot {
     return false;
   }
 
+  /// The operation requires the user to be logged in (validated via `_userID`).
+  ///
+  /// If the request is successful, the method returns `true`. Otherwise, it returns `false`.
+  ///
+  /// Example:
+  /// ```dart
+  ///   bool isSuccess = await Engagespot.markNotificationAsSeen(notificationID: {{notificationID}});
+  ///
+  ///   if (isSuccess) {
+  ///     print("Notification marked as seen successfully.");
+  ///   } else {
+  ///     print("Failed to mark notification as seen.");
+  ///   }
+  /// ```
+  ///
+  /// Parameters:
+  /// - [notificationID]: The unique identifier of the notification to be marked as seen.
+  ///
+  /// Returns:
+  /// A `Future<bool>` indicating whether the notification was successfully marked as seen:
+  /// - Returns `true` if the operation was successful.
+  /// - Returns `false` if the operation failed or the user was not logged in.
+  static Future<bool> markNotificationAsSeen(
+      {required int notificationID}) async {
+    try {
+      if (_userID != null && _userID != "") {
+        final response = await get(
+          Uri.parse("$_baseUrl${_version}notifications/$notificationID"),
+          headers: {
+            "X-ENGAGESPOT-API-KEY": _apiKey!,
+            "X-ENGAGESPOT-USER-ID": _userID!,
+            "X-ENGAGESPOT-DEVICE-ID": "123",
+          },
+        );
+
+        if (response.statusCode == 200) {
+          if (_isDebug) {
+            log("Notification with ID $notificationID mark as seen successfully.");
+          }
+          return true;
+        } else {
+          log("Failed to mark as seen notification with ID $notificationID. Status code: ${response.statusCode}");
+          log("Response body: ${response.body}");
+        }
+      } else {
+        if (_isDebug) {
+          log("User not logined");
+        }
+      }
+    } catch (e) {
+      log("Error occurred while updating status notification with ID $notificationID: $e");
+    }
+
+    return false;
+  }
+
   @Deprecated(
       "Use 'markAllAsRead' instead. This function will be removed in a future release.")
   static markAsRead() async {
@@ -183,7 +239,53 @@ class Engagespot {
   /// - Logs a debug message if the user is not logged in.
   ///
   /// **Method Implementation
+  @Deprecated(
+      "Use 'markAllAsSeen' instead. This function will be removed in a future release.")
   static markAllAsRead() async {
+    if (_userID != null && _userID != "") {
+      await post(
+        Uri.parse(
+            _baseUrl + _version + "notifications/markAllNotificationsAsSeen"),
+        headers: {
+          "X-ENGAGESPOT-API-KEY": _apiKey!,
+          "X-ENGAGESPOT-USER-ID": _userID!,
+          "X-ENGAGESPOT-DEVICE-ID": "123"
+        },
+      );
+    } else {
+      if (_isDebug) log("User not logined");
+    }
+  }
+
+  /// Marks all notifications as read for the current user.
+  ///
+  /// This method sends a POST request to the notification service endpoint
+  /// to mark all notifications as seen for the specified user. It requires the
+  /// `_userID` to be non-null and non-empty, ensuring the user is logged in.
+  ///
+  /// **Parameters:**
+  /// - None
+  ///
+  /// **Returns:**
+  /// - A [Future<void>] indicating the asynchronous operation.
+  ///
+  /// **Usage Example:**
+  /// ```dart
+  /// await markAllAsRead();
+  /// ```
+  ///
+  /// **Error Handling:**
+  /// - If `_userID` is `null` or empty, the method logs an error message if `_isDebug` is enabled.
+  /// - Ensure `_apiKey` and `_userID` are properly initialized before calling this method.
+  ///
+  /// **Dependencies:**
+  /// - Requires `_baseUrl`, `_version`, `_apiKey`, `_userID`, and `_isDebug` to be correctly configured.
+  ///
+  /// **Logs:**
+  /// - Logs a debug message if the user is not logged in.
+  ///
+  /// **Method Implementation
+  static markAllAsSeen() async {
     if (_userID != null && _userID != "") {
       await post(
         Uri.parse(
@@ -307,7 +409,7 @@ class Engagespot {
           var jMessage = json.decode(Response.body);
           NotificationModel MessageData = NotificationModel.fromJson(jMessage);
           NotificationList = MessageData.esMessage!;
-          nsList.unReadCount = MessageData.unreadCount;
+          nsList.unReadCount = MessageData.unSeenCount;
           nsList.notificationMessage = NotificationList;
         } else {
           if (_isDebug) {

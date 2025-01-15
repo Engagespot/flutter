@@ -1,12 +1,12 @@
 class NotificationModel {
-  int? unreadCount;
+  int? unSeenCount;
   Pagination? pagination;
   List<EsMessage>? esMessage;
 
-  NotificationModel({this.unreadCount, this.pagination, this.esMessage});
+  NotificationModel({this.unSeenCount, this.pagination, this.esMessage});
 
   NotificationModel.fromJson(Map<String, dynamic> json) {
-    unreadCount = json['unreadCount'];
+    unSeenCount = json['unreadCount'];
     pagination = json['pagination'] != null
         ? Pagination.fromJson(json['pagination'])
         : null;

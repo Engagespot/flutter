@@ -22,3 +22,7 @@
 
 * New function added: Function to mark single notification  as Read.
 * TODO: Function `markAsRead` is deprecated. Use the new method `markAllAsRead` instead.
+
+## 0.0.6
+
+* New Function added: Function to mark single notification as seen
