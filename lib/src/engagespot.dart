@@ -201,6 +201,60 @@ class Engagespot {
     }
   }
 
+  /// The operation requires the user to be logged in (validated via `_userID`).
+  ///
+  /// If the request is successful, the method returns `true`. Otherwise, it returns `false`.
+  ///
+  /// Example:
+  /// ```dart
+  ///   bool isSuccess = await Engagespot.markNotificationAsSeen(notificationID: {{notificationID}});
+  ///
+  ///   if (isSuccess) {
+  ///     print("Notification marked as seen successfully.");
+  ///   } else {
+  ///     print("Failed to mark notification as seen.");
+  ///   }
+  /// ```
+  ///
+  /// Parameters:
+  /// - [notificationID]: The unique identifier of the notification to be marked as seen.
+  ///
+  /// Returns:
+  /// A `Future<bool>` indicating whether the notification was successfully marked as seen:
+  /// - Returns `true` if the operation was successful.
+  /// - Returns `false` if the operation failed or the user was not logged in.
+  static Future<bool> markNotificationAsSeen(
+      {required int notificationID}) async {
+    try {
+      if (_userID != null && _userID != "") {
+        final response = await post(
+          Uri.parse("$_baseUrl${_version}notifications/$notificationID/views"),
+          headers: {
+            "X-ENGAGESPOT-API-KEY": _apiKey!,
+            "X-ENGAGESPOT-USER-ID": _userID!,
+            "X-ENGAGESPOT-DEVICE-ID": "123",
+          },
+        );
+        if (response.statusCode == 200) {
+          if (_isDebug) {
+            log("Notification with ID $notificationID mark as seen successfully.");
+          }
+          return true;
+        } else {
+          log("Failed to mark as seen notification with ID $notificationID. Status code: ${response.statusCode}");
+          log("Response body: ${response.body}");
+        }
+      } else {
+        if (_isDebug) {
+          log("User not logined");
+        }
+      }
+    } catch (e) {
+      log("Error occurred while updating status notification with ID $notificationID: $e");
+    }
+    return false;
+  }
+
   /// Marks all notifications as read for the current user.
   ///
   /// This method sends a POST request to the notification service endpoint

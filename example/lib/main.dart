@@ -9,6 +9,7 @@ void main() {
     apiKey: "{{api_key}}",
   );
   Engagespot.LoginUser(userId: "user_id");
+
   runApp(const MainApp());
 }
 
