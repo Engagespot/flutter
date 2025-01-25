@@ -26,3 +26,4 @@
 ## 0.0.6
 
 * Function renamed
+* New function added: Function to mark notification as seen. `markAsSeen`.
